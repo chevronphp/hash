@@ -8,11 +8,25 @@ class HashTest extends PHPUnit_Framework_TestCase {
 	protected $example   = '$2y$10$eDMOVRf3jz9MVydPOMm3/OpQOJFcGfzfcL.2pqc0EEomFRgbnj0nS';
 
 	/**
-	 * @expectedException \InvalidArgumentException
+	 * @expectedException \OutOfBoundsException
 	 */
 	public function test_setAlgo(){
 		$U = new Hash\Hash;
 		$U->setAlgo("boom");
+	}
+
+	/**
+	 * @expectedException \OutOfRangeException
+	 */
+	public function test_setCostLow(){
+		(new Hash\Hash)->setCost(3);
+	}
+
+	/**
+	 * @expectedException \OutOfRangeException
+	 */
+	public function test_setCostHigh(){
+		(new Hash\Hash)->setCost(32);
 	}
 
 	public function test_getAlgo(){
